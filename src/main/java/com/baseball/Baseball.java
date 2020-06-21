@@ -6,6 +6,10 @@ class Strike {
     public String zone(int zones, int computer) {
 
         String rst = "";
+        if((int) Math.log10(zones)+1 > 3 || (int) Math.log10(zones)+1 < 3) {
+            System.out.println("3자리의 숫자만 입력 가능 합니다.");
+            return "";
+        }
         System.out.println(computer);
         System.out.println(zones);
         int ball = 0, str = 0;
@@ -48,6 +52,7 @@ public class Baseball {
         String result = strike.zone(zone, computer);
         while (!result.equals("3개의 숫자를 모두 맞히셨습니다! 게임 종료")) {
             System.out.println(result);
+            System.out.printf("숫자를 입력해 주세요 : ");
             zone = scanner.nextInt();
             result = strike.zone(zone, computer);
         }
