@@ -24,13 +24,13 @@ class Strike {
                 }
             }
         }
-        if(str == 3){
-            return "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+        if (str == 3) {
+            return "clear";
         } else if (str == 0 && ball == 0) {
             return "nothing";
         }
-        rst = str > 0? str + "스트라이크 " : "";
-        rst += ball > 0? ball + "볼 " : "";
+        rst = str > 0 ? str + "스트라이크 " : "";
+        rst += ball > 0 ? ball + "볼 " : "";
         return rst;
     }
 
@@ -40,23 +40,31 @@ class Strike {
 public class Baseball {
     public static void main(String[] args) {
         int computer = (int) (Math.random() * (100 - 1) + 111);
-        Scanner scanner = new Scanner(System.in);
-        System.out.printf("숫자를 입력해 주세요 : ");
         int zone = 0;
-        if(!scanner.hasNextInt()) {
-            scanner.next();
-            System.err.print("1 ~ 9까지의 숫자를 3개 입력해 주세요. \n재 입력 :");
-        }
-        zone = scanner.nextInt();
+        Scanner scanner = new Scanner(System.in);
+
         Strike strike = new Strike();
-        String result = strike.zone(zone, computer);
-        while (!result.equals("3개의 숫자를 모두 맞히셨습니다! 게임 종료")) {
-            System.out.println(result);
+        String result = "";
+        int restart = 0;
+
+        while (true) {
             System.out.printf("숫자를 입력해 주세요 : ");
             zone = scanner.nextInt();
             result = strike.zone(zone, computer);
+
+            if (result.equals("clear")) {
+                System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+                System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+                restart = scanner.nextInt();
+                if (restart == 2) {
+                    scanner.close();
+                    break;
+                } else {
+                    computer = (int) (Math.random() * (100 - 1) + 111);
+                }
+            } else {
+                System.out.println(result);
+            }
         }
-        scanner.close();
-        System.out.println(result);
     }
 }
