@@ -17,8 +17,8 @@ public class Main {
                 System.out.println("숫자를 다시 입력해주세요.");
                 continue;
             }
-            System.out.println(c.checkNumber(userInput, computerInput));
             System.out.println("상대방 숫자는 " + computerInput + "입니다.");
+            System.out.println(c.checkNumber(userInput, computerInput));
         }
         System.out.println("게임이 종료됐습니다. 감사합니다.");
     }
