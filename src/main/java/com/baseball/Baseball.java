@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 class Strike {
     public String zone(int zones, int computer) {
+        System.out.println(computer);
+        System.out.println(zones);
         if (!verification(zones)) {
             System.out.println("3자리의 숫자만 입력 가능 합니다.");
             return "";
@@ -28,7 +30,7 @@ class Strike {
             System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요");
             return "clear";
         } else if (str == 0 && ball == 0) {
-            return "nothing";
+            rst = "nothing";
         }
         if (str > 0) rst = str + "스트라이크 ";
         if (ball > 0) rst += ball + "볼 ";
