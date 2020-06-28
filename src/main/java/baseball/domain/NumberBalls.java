@@ -9,7 +9,7 @@ import java.util.Set;
 
 public final class NumberBalls {
     static final int BALL_NUMBER_LENGTH = 3;
-    private static final int DEFAULT_STRIKE_COUNT = 0;
+    private static final int DEFAULT_STRIKE_COUNT_NUMBER = 0;
 
     private static final String INVALID_BALLS_ARGUMENT_EXCEPTION_MESSAGE = "입력 값이 유효하지 않습니다.";
     private static final String DUPLICATE_NUMBER_CONTAINS_EXCEPTION_MESSAGE = "중복된 값은 들어갈 수 없습니다.";
@@ -47,29 +47,29 @@ public final class NumberBalls {
         }
     }
 
-    public Result compute(final NumberBalls otherBalls) {
-        final int strikeCount = computeStrike(otherBalls);
-        final int ballCount = computeBall(otherBalls, strikeCount);
-        return Result.of(strikeCount, ballCount);
+    public Result compute(final NumberBalls other) {
+        final int strike = computeStrike(other);
+        final int ball = computeBall(other, strike);
+        return Result.of(strike, ball);
     }
 
-    private int computeStrike(final NumberBalls comparer) {
-        int strikeCount = DEFAULT_STRIKE_COUNT;
+    private int computeStrike(final NumberBalls other) {
+        int strike = DEFAULT_STRIKE_COUNT_NUMBER;
         for (int i = 0; i < this.balls.size(); i++) {
-            if (this.balls.get(i).equals(comparer.balls.get(i))) {
-                strikeCount++;
+            if (this.balls.get(i).equals(other.balls.get(i))) {
+                strike++;
             }
         }
-        return strikeCount;
+        return strike;
     }
 
-    private int computeBall(final NumberBalls otherBalls, final int strikeCount) {
-        final int ballCandidateCount = getBallCandidateCount(otherBalls);
-        return ballCandidateCount - strikeCount;
+    private int computeBall(final NumberBalls other, final int strike) {
+        final int ballCandidateCount = computeCountOfBallCandidate(other);
+        return ballCandidateCount - strike;
     }
 
-    private int getBallCandidateCount(final NumberBalls comparer) {
-        final List<NumberBall> otherBalls = comparer.balls;
+    private int computeCountOfBallCandidate(final NumberBalls other) {
+        final List<NumberBall> otherBalls = other.balls;
         final Set<NumberBall> distinctNumbers = new HashSet<>(this.balls);
         distinctNumbers.addAll(otherBalls);
         return this.balls.size() + otherBalls.size() - distinctNumbers.size();

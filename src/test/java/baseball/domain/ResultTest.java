@@ -28,6 +28,6 @@ class ResultTest {
     @CsvSource(value = {"3, true", "2, false"})
     void isAllStrikeTest(int strikeCount, boolean isAllStrike) {
         Result result = Result.of(strikeCount, 0);
-        assertThat(result.isAllStrike()).isEqualTo(isAllStrike);
+        assertThat(result.isAllStrikes()).isEqualTo(isAllStrike);
     }
 }

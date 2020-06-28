@@ -29,7 +29,7 @@ public final class Result {
         return new Result(Count.of(strikeCount), Count.of(ballCount));
     }
 
-    public boolean isAllStrike() {
+    public boolean isAllStrikes() {
         return strike.isSameValue(NumberBalls.BALL_NUMBER_LENGTH);
     }
 

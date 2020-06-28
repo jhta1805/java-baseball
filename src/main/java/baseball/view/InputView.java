@@ -21,7 +21,7 @@ public class InputView {
         }
     }
 
-    public static String inputPlayAgain() {
+    public static String inputWhetherReplay() {
         System.out.print(INPUT_PLAY_AGAIN_INTRO_MESSAGE);
         return SCANNER.next();
     }

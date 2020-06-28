@@ -4,7 +4,7 @@ import baseball.domain.AutoNumberBallsGenerator;
 import baseball.domain.ManualNumberBallsFactory;
 import baseball.domain.NumberBalls;
 import baseball.domain.NumberBallsGenerator;
-import baseball.domain.PlayerChoice;
+import baseball.domain.WhetherReplay;
 import baseball.domain.Result;
 import baseball.view.InputView;
 import baseball.view.OutputView;
@@ -16,21 +16,21 @@ public class BaseBallMainApplication {
             final NumberBalls computerBalls = autoGenerator.generateBalls();
             inputNumberWhileAllStrike(computerBalls);
             OutputView.printWinningMessage();
-        } while (inputPlayGameAgain().isPlayAgain());
+        } while (inputWhetherReplay().isReplay());
     }
 
     private static void inputNumberWhileAllStrike(final NumberBalls computerBalls) {
         while (true) {
-            final NumberBalls playerBalls = inputPlayerNumberBalls();
+            final NumberBalls playerBalls = inputPlayerBalls();
             final Result computeResult = computerBalls.compute(playerBalls);
             OutputView.printCompareResult(computeResult);
-            if (computeResult.isAllStrike()) {
+            if (computeResult.isAllStrikes()) {
                 break;
             }
         }
     }
 
-    private static NumberBalls inputPlayerNumberBalls() {
+    private static NumberBalls inputPlayerBalls() {
         while (true) {
             try {
                 final NumberBallsGenerator manualBallsGenerator = new ManualNumberBallsFactory(
@@ -42,10 +42,10 @@ public class BaseBallMainApplication {
         }
     }
 
-    private static PlayerChoice inputPlayGameAgain() {
+    private static WhetherReplay inputWhetherReplay() {
         while (true) {
             try {
-                return PlayerChoice.of(InputView.inputPlayAgain());
+                return WhetherReplay.of(InputView.inputWhetherReplay());
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e);
             }
