@@ -6,8 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public class NumberBalls {
-    public static final int BALL_NUMBER_LENGTH = 3;
-
+    static final int BALL_NUMBER_LENGTH = 3;
     private static final String INVALID_BALLS_ARGUMENT_EXCEPTION_MESSAGE = "입력 값이 유효하지 않습니다.";
     private static final String DUPLICATE_NUMBER_CONTAINS_EXCEPTION_MESSAGE = "중복된 값은 들어갈 수 없습니다.";
     private static final String NULL_ARGUMENT_EXCEPTION_MESSAGE = "Null객체는 허용되지 않습니다.";
