@@ -17,6 +17,4 @@ public class Baseball {
     public void setUserNumber(String userNumber) {
         this.userNumber = userNumber;
     }
-
-
 }

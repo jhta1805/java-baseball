@@ -9,24 +9,6 @@ public class BaseballServiceImpl implements BaseballService {
         return checkNumber(b.getUserNumber(), b.getComNumber());
     }
 
-    @Override
-    public String checkNumber(String userNumber, String comNumber) {
-        int bcnt = 0;
-        int scnt = 0;
-        int cn = Integer.parseInt(comNumber);
-        for (int i = 0; i < comNumber.length(); i++) {
-            String kcn = cn % 10 + "";
-            int chk = reverseStr(userNumber).lastIndexOf(kcn);
-            if (chk > -1 && chk != i) {
-                bcnt++;
-            }
-            if (chk == i) {
-                scnt++;
-            }
-            cn = cn / 10;
-        }
-        return result(bcnt, scnt);
-    }
 
     @Override
     public Boolean checkLength(String userNumber) {
@@ -57,7 +39,24 @@ public class BaseballServiceImpl implements BaseballService {
 
     }
 
-    @Override
+    public String checkNumber(String userNumber, String comNumber) {
+        int bcnt = 0;
+        int scnt = 0;
+        int cn = Integer.parseInt(comNumber);
+        for (int i = 0; i < comNumber.length(); i++) {
+            String kcn = cn % 10 + "";
+            int chk = reverseStr(userNumber).lastIndexOf(kcn);
+            if (chk > -1 && chk != i) {
+                bcnt++;
+            }
+            if (chk == i) {
+                scnt++;
+            }
+            cn = cn / 10;
+        }
+        return result(bcnt, scnt);
+    }
+
     public String result(int bCnt, int sCnt) {
         String res = "";
         if (bCnt > 0) {
@@ -74,8 +73,11 @@ public class BaseballServiceImpl implements BaseballService {
 
     public String getRandomInteger(int maximum, int minimum, int length) {
         String res = "";
-        for (int i = 0; i < length; i++) {
-            res += ((int) (Math.random() * (maximum - minimum))) + minimum;
+        while(!(res.length() == length)) {
+            int num = ((int) (Math.random() * (maximum - minimum))) + minimum;
+            if (res.indexOf(num + "") == -1) {
+                res +=num;
+            }
         }
         return res;
     }
@@ -85,3 +87,4 @@ public class BaseballServiceImpl implements BaseballService {
         return (new StringBuffer(s)).reverse().toString();
     }
 }
+
