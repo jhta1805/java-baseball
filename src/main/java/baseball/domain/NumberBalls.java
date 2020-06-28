@@ -9,6 +9,7 @@ import java.util.Set;
 
 public final class NumberBalls {
     static final int BALL_NUMBER_LENGTH = 3;
+    private static final int DEFAULT_STRIKE_COUNT = 0;
 
     private static final String INVALID_BALLS_ARGUMENT_EXCEPTION_MESSAGE = "입력 값이 유효하지 않습니다.";
     private static final String DUPLICATE_NUMBER_CONTAINS_EXCEPTION_MESSAGE = "중복된 값은 들어갈 수 없습니다.";
@@ -17,11 +18,11 @@ public final class NumberBalls {
     private final List<NumberBall> balls;
 
     public NumberBalls(final List<NumberBall> balls) {
-        verifyArgument(balls);
+        verifyBalls(balls);
         this.balls = Collections.unmodifiableList(new ArrayList<>(balls));
     }
 
-    private void verifyArgument(final List<NumberBall> balls) {
+    private void verifyBalls(final List<NumberBall> balls) {
         verifyNonNull(balls);
         verifyNoContainsDuplicateBall(balls);
         verifyLength(balls);
@@ -53,7 +54,7 @@ public final class NumberBalls {
     }
 
     private int computeStrike(final NumberBalls comparer) {
-        int strikeCount = 0;
+        int strikeCount = DEFAULT_STRIKE_COUNT;
         for (int i = 0; i < this.balls.size(); i++) {
             if (this.balls.get(i).equals(comparer.balls.get(i))) {
                 strikeCount++;

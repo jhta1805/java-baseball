@@ -4,6 +4,8 @@ import baseball.domain.Count;
 import baseball.domain.Result;
 
 public class OutputView {
+    private static final int NOT_EXIST_VALUE = 0;
+
     private static final String STRIKE_MESSAGE = "스트라이크";
     private static final String BALL_MESSAGE = "볼";
     private static final String NOTHING_MESSAGE = "낫싱";
@@ -23,7 +25,7 @@ public class OutputView {
     }
 
     private static boolean isNothing(final Count strike, final Count ball) {
-        return strike.getValue() == 0 && ball.getValue() == 0;
+        return strike.getValue() == NOT_EXIST_VALUE && ball.getValue() == NOT_EXIST_VALUE;
     }
 
     private static void printResultWithAnyMatchingInfo(final Count strike, final Count ball) {
@@ -36,13 +38,13 @@ public class OutputView {
     }
 
     private static void appendCommaIfAllResultExists(final StringBuilder result, final int strike, final int ball) {
-        if (strike * ball != 0) {
+        if (strike * ball != NOT_EXIST_VALUE) {
             result.append(SPLITTER);
         }
     }
 
     private static void appendMessageIfValueExists(final StringBuilder result, final int value, final String message) {
-        if (value != 0) {
+        if (value != NOT_EXIST_VALUE) {
             result.append(value);
             result.append(message);
         }
