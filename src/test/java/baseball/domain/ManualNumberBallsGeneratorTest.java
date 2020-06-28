@@ -12,7 +12,7 @@ class ManualNumberBallsGeneratorTest {
     @DisplayName("중복이 없고 0이 포함되지 않은 세자리의 자연수를 숫자 목록 객체로 생성한다.")
     @Test
     void generateBalls_test() {
-        NumberBallsGenerator numberBallsGenerator = new ManualNumberBallsFactory(321);
+        NumberBallsGenerator numberBallsGenerator = new ManualNumberBallsGenerator(321);
         assertThat(numberBallsGenerator.generateBalls())
             .isEqualTo(new NumberBalls(Lists.list(NumberBall.of(3), NumberBall.of(2), NumberBall.of(1))));
     }
@@ -22,7 +22,7 @@ class ManualNumberBallsGeneratorTest {
     @ValueSource(ints = {333, 1234, 75, -152, -10})
     void generateBalls_test_fail(int value) {
         assertThatThrownBy(() -> {
-            NumberBallsGenerator numberBallsGenerator = new ManualNumberBallsFactory(value);
+            NumberBallsGenerator numberBallsGenerator = new ManualNumberBallsGenerator(value);
             numberBallsGenerator.generateBalls();
         }).isInstanceOf(IllegalArgumentException.class);
     }

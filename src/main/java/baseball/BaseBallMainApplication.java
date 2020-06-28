@@ -1,7 +1,7 @@
 package baseball;
 
 import baseball.domain.AutoNumberBallsGenerator;
-import baseball.domain.ManualNumberBallsFactory;
+import baseball.domain.ManualNumberBallsGenerator;
 import baseball.domain.NumberBalls;
 import baseball.domain.NumberBallsGenerator;
 import baseball.domain.WhetherReplay;
@@ -33,7 +33,7 @@ public class BaseBallMainApplication {
     private static NumberBalls inputPlayerBalls() {
         while (true) {
             try {
-                final NumberBallsGenerator manualBallsGenerator = new ManualNumberBallsFactory(
+                final NumberBallsGenerator manualBallsGenerator = new ManualNumberBallsGenerator(
                     InputView.inputBaseBallNumbers());
                 return manualBallsGenerator.generateBalls();
             } catch (IllegalArgumentException e) {
