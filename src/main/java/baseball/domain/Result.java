@@ -2,37 +2,38 @@ package baseball.domain;
 
 import java.util.Objects;
 
-public class Result {
-    private final int strikeCount;
-    private final int ballCount;
+public final class Result {
+    private static final String INVALID_TOTAL_COUNT_OF_STRIKE_BALL_EXCEPTION_MESSAGE =
+        "스트라이크와 볼의 값의 합이 현재 가능한 값을 넘었습니다.";
 
-    public Result(int strikeCount, int ballCount) {
+    private final Count strikeCount;
+    private final Count ballCount;
+
+    private Result(Count strikeCount, Count ballCount) {
         verifyCounts(strikeCount, ballCount);
         this.strikeCount = strikeCount;
         this.ballCount = ballCount;
     }
 
-    private void verifyCounts(int strikeCount, int ballCount) {
-        if (strikeCount < 0 || strikeCount > NumberBalls.BALL_NUMBER_LENGTH) {
-            throw new IllegalArgumentException();
+    private void verifyCounts(Count strikeCount, Count ballCount) {
+        if (strikeCount.isSumOfValueGreaterThanMax(ballCount)) {
+            throw new IllegalArgumentException(INVALID_TOTAL_COUNT_OF_STRIKE_BALL_EXCEPTION_MESSAGE);
         }
-        if (ballCount < 0 || ballCount > NumberBalls.BALL_NUMBER_LENGTH) {
-            throw new IllegalArgumentException();
-        }
-        if (strikeCount + ballCount > NumberBalls.BALL_NUMBER_LENGTH) {
-            throw new IllegalArgumentException();
-        }
+    }
+
+    public static Result of(int strikeCount, int ballCount) {
+        return new Result(Count.of(strikeCount), Count.of(ballCount));
     }
 
     public boolean isAllStrike() {
-        return strikeCount == NumberBalls.BALL_NUMBER_LENGTH;
+        return strikeCount.isSameValue(NumberBalls.BALL_NUMBER_LENGTH);
     }
 
-    public int getStrikeCount() {
+    public Count getStrikeCount() {
         return strikeCount;
     }
 
-    public int getBallCount() {
+    public Count getBallCount() {
         return ballCount;
     }
 

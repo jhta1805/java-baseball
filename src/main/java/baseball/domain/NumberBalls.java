@@ -1,11 +1,13 @@
 package baseball.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-public class NumberBalls {
+public final class NumberBalls {
     static final int BALL_NUMBER_LENGTH = 3;
 
     private static final String INVALID_BALLS_ARGUMENT_EXCEPTION_MESSAGE = "입력 값이 유효하지 않습니다.";
@@ -16,7 +18,7 @@ public class NumberBalls {
 
     public NumberBalls(final List<NumberBall> balls) {
         verifyArgument(balls);
-        this.balls = balls;
+        this.balls = Collections.unmodifiableList(new ArrayList<>(balls));
     }
 
     private void verifyArgument(List<NumberBall> balls) {
@@ -47,7 +49,7 @@ public class NumberBalls {
     public Result compute(NumberBalls otherBalls) {
         int strikeCount = computeStrike(otherBalls);
         int ballCount = computeBall(otherBalls, strikeCount);
-        return new Result(strikeCount, ballCount);
+        return Result.of(strikeCount, ballCount);
     }
 
     private int computeStrike(NumberBalls comparer) {

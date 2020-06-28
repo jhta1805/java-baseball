@@ -65,15 +65,15 @@ class NumberBallsTest {
         NumberBall six = NumberBall.of(6);
 
         return Stream.of(
-            Arguments.of(new NumberBalls(Lists.list(one, two, three)), new Result(3, 0)),
-            Arguments.of(new NumberBalls(Lists.list(one, four, three)), new Result(2, 0)),
-            Arguments.of(new NumberBalls(Lists.list(five, two, six)), new Result(1, 0)),
-            Arguments.of(new NumberBalls(Lists.list(five, four, six)), new Result(0, 0)),
-            Arguments.of(new NumberBalls(Lists.list(one, five, two)), new Result(1, 1)),
-            Arguments.of(new NumberBalls(Lists.list(five, three, six)), new Result(0, 1)),
-            Arguments.of(new NumberBalls(Lists.list(two, one, three)), new Result(1, 2)),
-            Arguments.of(new NumberBalls(Lists.list(three, four, two)), new Result(0, 2)),
-            Arguments.of(new NumberBalls(Lists.list(three, one, two)), new Result(0, 3))
+            Arguments.of(new NumberBalls(Lists.list(one, two, three)), Result.of(3, 0)),
+            Arguments.of(new NumberBalls(Lists.list(one, four, three)), Result.of(2, 0)),
+            Arguments.of(new NumberBalls(Lists.list(five, two, six)), Result.of(1, 0)),
+            Arguments.of(new NumberBalls(Lists.list(five, four, six)), Result.of(0, 0)),
+            Arguments.of(new NumberBalls(Lists.list(one, five, two)), Result.of(1, 1)),
+            Arguments.of(new NumberBalls(Lists.list(five, three, six)), Result.of(0, 1)),
+            Arguments.of(new NumberBalls(Lists.list(two, one, three)), Result.of(1, 2)),
+            Arguments.of(new NumberBalls(Lists.list(three, four, two)), Result.of(0, 2)),
+            Arguments.of(new NumberBalls(Lists.list(three, one, two)), Result.of(0, 3))
         );
     }
 }

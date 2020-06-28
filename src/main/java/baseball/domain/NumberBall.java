@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class NumberBall {
+public final class NumberBall {
     static final int MIN_VALUE = 1;
     static final int MAX_VALUE = 9;
     private static final Map<Integer, NumberBall> BALL_CACHE = new HashMap<>();
 
-    private static final String OUT_OF_BOUND_BALL_NUMBER_EXCEPTION_MESSAGE = "주어진 범위 바깥의 볼은 사용할 수 없어요.";
+    private static final String INVALID_BALL_NUMBER_BOUNDARY_EXCEPTION_MESSAGE = "주어진 범위 바깥의 볼은 사용할 수 없어요.";
 
     static {
         for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {
@@ -20,14 +20,21 @@ public class NumberBall {
     private final int value;
 
     private NumberBall(int value) {
+        verifyNumberBall(value);
         this.value = value;
+    }
+
+    private void verifyNumberBall(int value) {
+        if (value < MIN_VALUE || value > MAX_VALUE) {
+            throw new IllegalArgumentException(INVALID_BALL_NUMBER_BOUNDARY_EXCEPTION_MESSAGE);
+        }
     }
 
     public static NumberBall of(int value) {
         if (BALL_CACHE.containsKey(value)) {
             return BALL_CACHE.get(value);
         }
-        throw new IllegalArgumentException(OUT_OF_BOUND_BALL_NUMBER_EXCEPTION_MESSAGE);
+        throw new IllegalArgumentException(INVALID_BALL_NUMBER_BOUNDARY_EXCEPTION_MESSAGE);
     }
 
     @Override

@@ -1,12 +1,13 @@
 package baseball.view;
 
+import baseball.domain.Count;
 import baseball.domain.Result;
 
 public class OutputView {
     public static void printCompareResult(Result compute) {
-        int strikeCount = compute.getStrikeCount();
-        int ballCount = compute.getBallCount();
-        System.out.printf("%d 스트라이크, %d 볼\n", strikeCount, ballCount);
+        Count strikeCount = compute.getStrikeCount();
+        Count ballCount = compute.getBallCount();
+        System.out.printf("%d 스트라이크, %d 볼\n", strikeCount.getValue(), ballCount.getValue());
     }
 
     public static void printWinningMessage() {

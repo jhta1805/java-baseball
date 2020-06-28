@@ -11,7 +11,7 @@ class ResultTest {
     @ParameterizedTest
     @CsvSource(value = {"0, 0", "1, 2", "2, 1", "3, 0", "0, 3"})
     void createTest(int strikeCount, int ballCount) {
-        assertThatCode(() -> new Result(strikeCount, ballCount))
+        assertThatCode(() -> Result.of(strikeCount, ballCount))
             .doesNotThrowAnyException();
     }
 
@@ -19,7 +19,7 @@ class ResultTest {
     @ParameterizedTest
     @CsvSource(value = {"-1, 0", "0, 4", "-1, 4", "1, 3"})
     void create_fail_when_invalid_count_include(int strikeCount, int ballCount) {
-        assertThatThrownBy(() -> new Result(strikeCount, ballCount))
+        assertThatThrownBy(() -> Result.of(strikeCount, ballCount))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -27,7 +27,7 @@ class ResultTest {
     @ParameterizedTest
     @CsvSource(value = {"3, true", "2, false"})
     void isAllStrikeTest(int strikeCount, boolean isAllStrike) {
-        Result result = new Result(strikeCount, 0);
+        Result result = Result.of(strikeCount, 0);
         assertThat(result.isAllStrike()).isEqualTo(isAllStrike);
     }
 }
