@@ -51,4 +51,8 @@ public class OutputView {
     public static void printWinningMessage() {
         System.out.println(GAME_END_MESSAGE);
     }
+
+    public static void printErrorMessage(final Exception e) {
+        System.out.println(e.getMessage());
+    }
 }

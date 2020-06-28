@@ -11,9 +11,9 @@ import baseball.view.OutputView;
 
 public class BaseBallMainApplication {
     public static void main(String[] args) {
-        final NumberBallsGenerator numberBallsGenerator = new AutoNumberBallsGenerator();
+        final NumberBallsGenerator autoGenerator = new AutoNumberBallsGenerator();
         do {
-            final NumberBalls computerBalls = numberBallsGenerator.generateBalls();
+            final NumberBalls computerBalls = autoGenerator.generateBalls();
             inputNumberWhileAllStrike(computerBalls);
             OutputView.printWinningMessage();
         } while (inputPlayGameAgain().isPlayAgain());
@@ -22,9 +22,9 @@ public class BaseBallMainApplication {
     private static void inputNumberWhileAllStrike(final NumberBalls computerBalls) {
         while (true) {
             final NumberBalls playerBalls = inputPlayerNumberBalls();
-            final Result compute = computerBalls.compute(playerBalls);
-            OutputView.printCompareResult(compute);
-            if (compute.isAllStrike()) {
+            final Result computeResult = computerBalls.compute(playerBalls);
+            OutputView.printCompareResult(computeResult);
+            if (computeResult.isAllStrike()) {
                 break;
             }
         }
@@ -33,11 +33,11 @@ public class BaseBallMainApplication {
     private static NumberBalls inputPlayerNumberBalls() {
         while (true) {
             try {
-                final NumberBallsGenerator manualNumberBallsGenerator = new ManualNumberBallsFactory(
+                final NumberBallsGenerator manualBallsGenerator = new ManualNumberBallsFactory(
                     InputView.inputBaseBallNumbers());
-                return manualNumberBallsGenerator.generateBalls();
+                return manualBallsGenerator.generateBalls();
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                OutputView.printErrorMessage(e);
             }
         }
     }
@@ -47,7 +47,7 @@ public class BaseBallMainApplication {
             try {
                 return PlayerChoice.of(InputView.inputPlayAgain());
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                OutputView.printErrorMessage(e);
             }
         }
     }
