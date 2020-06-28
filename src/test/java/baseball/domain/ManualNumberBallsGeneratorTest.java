@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class ManualNumberBallsFactoryTest {
+class ManualNumberBallsGeneratorTest {
     @DisplayName("중복이 없고 0이 포함되지 않은 세자리의 자연수를 숫자 목록 객체로 생성한다.")
     @Test
     void generateBalls_test() {
-        NumberBallsFactory numberBallsFactory = new ManualNumberBallsFactory(321);
-        assertThat(numberBallsFactory.generateBalls())
+        NumberBallsGenerator numberBallsGenerator = new ManualNumberBallsFactory(321);
+        assertThat(numberBallsGenerator.generateBalls())
             .isEqualTo(new NumberBalls(Lists.list(NumberBall.of(3), NumberBall.of(2), NumberBall.of(1))));
     }
 
@@ -21,7 +21,7 @@ class ManualNumberBallsFactoryTest {
     @ParameterizedTest
     @ValueSource(ints = {333, 1234, 75, -152, -10})
     void generateBalls_test_fail(int value) {
-        NumberBallsFactory numberBallsFactory = new ManualNumberBallsFactory(value);
-        assertThatThrownBy(numberBallsFactory::generateBalls).isInstanceOf(IllegalArgumentException.class);
+        NumberBallsGenerator numberBallsGenerator = new ManualNumberBallsFactory(value);
+        assertThatThrownBy(numberBallsGenerator::generateBalls).isInstanceOf(IllegalArgumentException.class);
     }
 }

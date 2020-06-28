@@ -1,9 +1,9 @@
 package baseball;
 
-import baseball.domain.AutoNumberBallsFactory;
+import baseball.domain.AutoNumberBallsGenerator;
 import baseball.domain.ManualNumberBallsFactory;
 import baseball.domain.NumberBalls;
-import baseball.domain.NumberBallsFactory;
+import baseball.domain.NumberBallsGenerator;
 import baseball.domain.PlayerChoice;
 import baseball.domain.Result;
 import baseball.view.InputView;
@@ -11,9 +11,9 @@ import baseball.view.OutputView;
 
 public class BaseBallMainApplication {
     public static void main(String[] args) {
-        final NumberBallsFactory numberBallsFactory = new AutoNumberBallsFactory();
+        final NumberBallsGenerator numberBallsGenerator = new AutoNumberBallsGenerator();
         do {
-            final NumberBalls computerBalls = numberBallsFactory.generateBalls();
+            final NumberBalls computerBalls = numberBallsGenerator.generateBalls();
             inputNumberWhileAllStrike(computerBalls);
             OutputView.printWinningMessage();
         } while (inputPlayGameAgain().isPlayAgain());
@@ -33,9 +33,9 @@ public class BaseBallMainApplication {
     private static NumberBalls inputPlayerNumberBalls() {
         while (true) {
             try {
-                final NumberBallsFactory manualNumberBallsFactory = new ManualNumberBallsFactory(
+                final NumberBallsGenerator manualNumberBallsGenerator = new ManualNumberBallsFactory(
                     InputView.inputBaseBallNumbers());
-                return manualNumberBallsFactory.generateBalls();
+                return manualNumberBallsGenerator.generateBalls();
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

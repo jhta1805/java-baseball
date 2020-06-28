@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AutoNumberBallsFactory implements NumberBallsFactory {
+public class AutoNumberBallsGenerator implements NumberBallsGenerator {
     private static final int BALLS_FIRST_INDEX = 0;
 
     private final List<NumberBall> allDistinctNumbers = new ArrayList<>();
 
-    public AutoNumberBallsFactory() {
+    public AutoNumberBallsGenerator() {
         init();
     }
 

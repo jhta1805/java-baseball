@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class ManualNumberBallsFactory implements NumberBallsFactory {
+public class ManualNumberBallsFactory implements NumberBallsGenerator {
     private static final int EXTRACT_COMPLETE_CRITERIA = 0;
     private static final int EXTRACT_BALL_NUMBER_DIVIDER = 10;
 

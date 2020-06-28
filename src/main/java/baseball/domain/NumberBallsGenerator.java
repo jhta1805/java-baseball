@@ -1,5 +1,5 @@
 package baseball.domain;
 
-public interface NumberBallsFactory {
+public interface NumberBallsGenerator {
     NumberBalls generateBalls();
 }
