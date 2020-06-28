@@ -43,4 +43,32 @@ public class NumberBalls {
             throw new IllegalArgumentException(INVALID_BALLS_ARGUMENT_EXCEPTION_MESSAGE);
         }
     }
+
+    public Result compute(NumberBalls otherBalls) {
+        int strikeCount = computeStrike(otherBalls);
+        int ballCount = computeBall(otherBalls, strikeCount);
+        return new Result(strikeCount, ballCount);
+    }
+
+    private int computeStrike(NumberBalls comparer) {
+        int strikeCount = 0;
+        for (int i = 0; i < this.balls.size(); i++) {
+            if (this.balls.get(i).equals(comparer.balls.get(i))) {
+                strikeCount++;
+            }
+        }
+        return strikeCount;
+    }
+
+    private int computeBall(NumberBalls otherBalls, int strikeCount) {
+        int ballCandidateCount = getBallCandidateCount(otherBalls);
+        return ballCandidateCount - strikeCount;
+    }
+
+    private int getBallCandidateCount(NumberBalls comparer) {
+        List<NumberBall> otherBalls = comparer.balls;
+        Set<NumberBall> distinctNumbers = new HashSet<>(this.balls);
+        distinctNumbers.addAll(otherBalls);
+        return this.balls.size() + otherBalls.size() - distinctNumbers.size();
+    }
 }

@@ -1,5 +1,7 @@
 package baseball.domain;
 
+import java.util.Objects;
+
 public class Result {
     private final int strikeCount;
     private final int ballCount;
@@ -24,5 +26,21 @@ public class Result {
 
     public boolean isAllStrike() {
         return strikeCount == NumberBalls.BALL_NUMBER_LENGTH;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Result result = (Result)o;
+        return strikeCount == result.strikeCount &&
+            ballCount == result.ballCount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(strikeCount, ballCount);
     }
 }
