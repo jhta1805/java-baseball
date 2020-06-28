@@ -1,0 +1,46 @@
+package baseball.domain;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
+public class NumberBalls {
+    public static final int BALL_NUMBER_LENGTH = 3;
+
+    private static final String INVALID_BALLS_ARGUMENT_EXCEPTION_MESSAGE = "입력 값이 유효하지 않습니다.";
+    private static final String DUPLICATE_NUMBER_CONTAINS_EXCEPTION_MESSAGE = "중복된 값은 들어갈 수 없습니다.";
+    private static final String NULL_ARGUMENT_EXCEPTION_MESSAGE = "Null객체는 허용되지 않습니다.";
+
+    private final List<NumberBall> balls;
+
+    public NumberBalls(final List<NumberBall> balls) {
+        verifyArgument(balls);
+        this.balls = balls;
+    }
+
+    private void verifyArgument(List<NumberBall> balls) {
+        verifyNonNull(balls);
+        verifyNoContainsDuplicateBall(balls);
+        verifyLength(balls);
+    }
+
+    private void verifyNonNull(List<NumberBall> balls) {
+        if (Objects.isNull(balls)) {
+            throw new IllegalArgumentException(NULL_ARGUMENT_EXCEPTION_MESSAGE);
+        }
+    }
+
+    private void verifyNoContainsDuplicateBall(List<NumberBall> balls) {
+        Set<NumberBall> numberBalls = new HashSet<>(balls);
+        if (balls.size() != numberBalls.size()) {
+            throw new IllegalArgumentException(DUPLICATE_NUMBER_CONTAINS_EXCEPTION_MESSAGE);
+        }
+    }
+
+    private void verifyLength(List<NumberBall> balls) {
+        if (balls.size() != BALL_NUMBER_LENGTH) {
+            throw new IllegalArgumentException(INVALID_BALLS_ARGUMENT_EXCEPTION_MESSAGE);
+        }
+    }
+}
