@@ -7,8 +7,9 @@ import java.util.Objects;
 public class NumberBall {
     static final int MIN_VALUE = 1;
     static final int MAX_VALUE = 9;
-    private static final String OUT_OF_BOUND_BALL_NUMBER_EXCEPTION_MESSAGE = "주어진 범위 바깥의 볼은 사용할 수 없어요.";
     private static final Map<Integer, NumberBall> BALL_CACHE = new HashMap<>();
+
+    private static final String OUT_OF_BOUND_BALL_NUMBER_EXCEPTION_MESSAGE = "주어진 범위 바깥의 볼은 사용할 수 없어요.";
 
     static {
         for (int i = MIN_VALUE; i <= MAX_VALUE; i++) {

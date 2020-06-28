@@ -28,6 +28,14 @@ public class Result {
         return strikeCount == NumberBalls.BALL_NUMBER_LENGTH;
     }
 
+    public int getStrikeCount() {
+        return strikeCount;
+    }
+
+    public int getBallCount() {
+        return ballCount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
