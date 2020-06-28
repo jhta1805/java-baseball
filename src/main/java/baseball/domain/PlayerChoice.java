@@ -9,11 +9,11 @@ public enum PlayerChoice {
 
     private final String chooseCode;
 
-    PlayerChoice(String chooseCode) {
+    PlayerChoice(final String chooseCode) {
         this.chooseCode = chooseCode;
     }
 
-    public static PlayerChoice of(String value) {
+    public static PlayerChoice of(final String value) {
         return Arrays.stream(values())
             .filter(playerChoiceValue -> playerChoiceValue.chooseCode.equals(value))
             .findFirst()

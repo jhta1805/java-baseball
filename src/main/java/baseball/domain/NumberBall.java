@@ -19,18 +19,18 @@ public final class NumberBall {
 
     private final int value;
 
-    private NumberBall(int value) {
+    private NumberBall(final int value) {
         verifyNumberBall(value);
         this.value = value;
     }
 
-    private void verifyNumberBall(int value) {
+    private void verifyNumberBall(final int value) {
         if (value < MIN_VALUE || value > MAX_VALUE) {
             throw new IllegalArgumentException(INVALID_BALL_NUMBER_BOUNDARY_EXCEPTION_MESSAGE);
         }
     }
 
-    public static NumberBall of(int value) {
+    public static NumberBall of(final int value) {
         if (BALL_CACHE.containsKey(value)) {
             return BALL_CACHE.get(value);
         }

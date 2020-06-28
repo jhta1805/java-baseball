@@ -11,18 +11,18 @@ import baseball.view.OutputView;
 
 public class BaseBallMainApplication {
     public static void main(String[] args) {
-        NumberBallsFactory numberBallsFactory = new AutoNumberBallsFactory();
+        final NumberBallsFactory numberBallsFactory = new AutoNumberBallsFactory();
         do {
-            NumberBalls computerBalls = numberBallsFactory.generateBalls();
-            inputPlayerBallsWhileAllStrike(computerBalls);
+            final NumberBalls computerBalls = numberBallsFactory.generateBalls();
+            inputNumberWhileAllStrike(computerBalls);
             OutputView.printWinningMessage();
         } while (inputPlayGameAgain().isPlayAgain());
     }
 
-    private static void inputPlayerBallsWhileAllStrike(NumberBalls computerBalls) {
+    private static void inputNumberWhileAllStrike(final NumberBalls computerBalls) {
         while (true) {
-            NumberBalls playerBalls = inputPlayerNumberBalls();
-            Result compute = computerBalls.compute(playerBalls);
+            final NumberBalls playerBalls = inputPlayerNumberBalls();
+            final Result compute = computerBalls.compute(playerBalls);
             OutputView.printCompareResult(compute);
             if (compute.isAllStrike()) {
                 break;
@@ -33,7 +33,7 @@ public class BaseBallMainApplication {
     private static NumberBalls inputPlayerNumberBalls() {
         while (true) {
             try {
-                NumberBallsFactory manualNumberBallsFactory = new ManualNumberBallsFactory(
+                final NumberBallsFactory manualNumberBallsFactory = new ManualNumberBallsFactory(
                     InputView.inputBaseBallNumbers());
                 return manualNumberBallsFactory.generateBalls();
             } catch (IllegalArgumentException e) {

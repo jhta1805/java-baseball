@@ -21,38 +21,38 @@ public final class NumberBalls {
         this.balls = Collections.unmodifiableList(new ArrayList<>(balls));
     }
 
-    private void verifyArgument(List<NumberBall> balls) {
+    private void verifyArgument(final List<NumberBall> balls) {
         verifyNonNull(balls);
         verifyNoContainsDuplicateBall(balls);
         verifyLength(balls);
     }
 
-    private void verifyNonNull(List<NumberBall> balls) {
+    private void verifyNonNull(final List<NumberBall> balls) {
         if (Objects.isNull(balls)) {
             throw new IllegalArgumentException(NULL_ARGUMENT_EXCEPTION_MESSAGE);
         }
     }
 
-    private void verifyNoContainsDuplicateBall(List<NumberBall> balls) {
-        Set<NumberBall> numberBalls = new HashSet<>(balls);
+    private void verifyNoContainsDuplicateBall(final List<NumberBall> balls) {
+        final Set<NumberBall> numberBalls = new HashSet<>(balls);
         if (balls.size() != numberBalls.size()) {
             throw new IllegalArgumentException(DUPLICATE_NUMBER_CONTAINS_EXCEPTION_MESSAGE);
         }
     }
 
-    private void verifyLength(List<NumberBall> balls) {
+    private void verifyLength(final List<NumberBall> balls) {
         if (balls.size() != BALL_NUMBER_LENGTH) {
             throw new IllegalArgumentException(INVALID_BALLS_ARGUMENT_EXCEPTION_MESSAGE);
         }
     }
 
-    public Result compute(NumberBalls otherBalls) {
-        int strikeCount = computeStrike(otherBalls);
-        int ballCount = computeBall(otherBalls, strikeCount);
+    public Result compute(final NumberBalls otherBalls) {
+        final int strikeCount = computeStrike(otherBalls);
+        final int ballCount = computeBall(otherBalls, strikeCount);
         return Result.of(strikeCount, ballCount);
     }
 
-    private int computeStrike(NumberBalls comparer) {
+    private int computeStrike(final NumberBalls comparer) {
         int strikeCount = 0;
         for (int i = 0; i < this.balls.size(); i++) {
             if (this.balls.get(i).equals(comparer.balls.get(i))) {
@@ -62,14 +62,14 @@ public final class NumberBalls {
         return strikeCount;
     }
 
-    private int computeBall(NumberBalls otherBalls, int strikeCount) {
-        int ballCandidateCount = getBallCandidateCount(otherBalls);
+    private int computeBall(final NumberBalls otherBalls, final int strikeCount) {
+        final int ballCandidateCount = getBallCandidateCount(otherBalls);
         return ballCandidateCount - strikeCount;
     }
 
-    private int getBallCandidateCount(NumberBalls comparer) {
-        List<NumberBall> otherBalls = comparer.balls;
-        Set<NumberBall> distinctNumbers = new HashSet<>(this.balls);
+    private int getBallCandidateCount(final NumberBalls comparer) {
+        final List<NumberBall> otherBalls = comparer.balls;
+        final Set<NumberBall> distinctNumbers = new HashSet<>(this.balls);
         distinctNumbers.addAll(otherBalls);
         return this.balls.size() + otherBalls.size() - distinctNumbers.size();
     }

@@ -20,29 +20,29 @@ public final class Count {
 
     private final int value;
 
-    private Count(int value) {
+    private Count(final int value) {
         verifyCountValue(value);
         this.value = value;
     }
 
-    private void verifyCountValue(int value) {
+    private void verifyCountValue(final int value) {
         if (value < MIN_COUNT_VALUE || value > MAX_COUNT_VALUE) {
             throw new IllegalArgumentException(INVALID_COUNT_VALUE_BOUNDARY_EXCEPTION_MESSAGE);
         }
     }
 
-    public static Count of(int value) {
+    public static Count of(final int value) {
         if (COUNT_CACHE.containsKey(value)) {
             return COUNT_CACHE.get(value);
         }
         throw new IllegalArgumentException(INVALID_COUNT_VALUE_BOUNDARY_EXCEPTION_MESSAGE);
     }
 
-    public boolean isSameValue(int countValue) {
+    public boolean isSameValue(final int countValue) {
         return this.value == countValue;
     }
 
-    public boolean isSumOfValueGreaterThanMax(Count otherCount) {
+    public boolean isSumOfValueGreaterThanMax(final Count otherCount) {
         return (this.value + otherCount.value) > NumberBalls.BALL_NUMBER_LENGTH;
     }
 

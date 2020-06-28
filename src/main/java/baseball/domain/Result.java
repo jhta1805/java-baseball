@@ -5,23 +5,27 @@ import java.util.Objects;
 public final class Result {
     private static final String INVALID_TOTAL_COUNT_OF_STRIKE_BALL_EXCEPTION_MESSAGE =
         "스트라이크와 볼의 값의 합이 현재 가능한 값을 넘었습니다.";
+    private static final String NULL_COUNT_EXCEPTION_MESSAGE = "NULL값이 들어갈 수 없습니다.";
 
     private final Count strikeCount;
     private final Count ballCount;
 
-    private Result(Count strikeCount, Count ballCount) {
+    private Result(final Count strikeCount, final Count ballCount) {
         verifyCounts(strikeCount, ballCount);
         this.strikeCount = strikeCount;
         this.ballCount = ballCount;
     }
 
-    private void verifyCounts(Count strikeCount, Count ballCount) {
+    private void verifyCounts(final Count strikeCount, final Count ballCount) {
+        if (Objects.isNull(strikeCount) || Objects.isNull(ballCount)) {
+            throw new IllegalArgumentException(NULL_COUNT_EXCEPTION_MESSAGE);
+        }
         if (strikeCount.isSumOfValueGreaterThanMax(ballCount)) {
             throw new IllegalArgumentException(INVALID_TOTAL_COUNT_OF_STRIKE_BALL_EXCEPTION_MESSAGE);
         }
     }
 
-    public static Result of(int strikeCount, int ballCount) {
+    public static Result of(final int strikeCount, final int ballCount) {
         return new Result(Count.of(strikeCount), Count.of(ballCount));
     }
 

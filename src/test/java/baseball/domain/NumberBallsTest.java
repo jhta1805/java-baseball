@@ -1,10 +1,10 @@
 package baseball.domain;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.util.Lists.*;
 
 import java.util.stream.Stream;
 
-import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ class NumberBallsTest {
     @DisplayName("중복이 없고, NumberBall를 3개 입력 받는 경우 NumberBalls 생성이 된다.")
     @Test
     void create_test() {
-        assertThatCode(() -> new NumberBalls(Lists.list(numberOne, numberTwo, numberThree)))
+        assertThatCode(() -> new NumberBalls(list(numberOne, numberTwo, numberThree)))
             .doesNotThrowAnyException();
     }
 
@@ -35,7 +35,7 @@ class NumberBallsTest {
     @Test
     void create_exception_when_contains_duplicate_number() {
         NumberBall sameBallWithFirstBall = numberOne;
-        assertThatThrownBy(() -> new NumberBalls(Lists.list(numberOne, numberTwo, sameBallWithFirstBall)))
+        assertThatThrownBy(() -> new NumberBalls(list(numberOne, numberTwo, sameBallWithFirstBall)))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -44,7 +44,7 @@ class NumberBallsTest {
     void create_exception_when_balls_size_is_invalid() {
         NumberBall firstNumber = NumberBall.of(1);
         NumberBall secondNumber = NumberBall.of(2);
-        assertThatThrownBy(() -> new NumberBalls(Lists.list(firstNumber, secondNumber)))
+        assertThatThrownBy(() -> new NumberBalls(list(firstNumber, secondNumber)))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -52,7 +52,7 @@ class NumberBallsTest {
     @ParameterizedTest
     @MethodSource("getPlayerBallsAndResultSet")
     void compute_baseball_result(NumberBalls playerBalls, Result gameResult) {
-        NumberBalls computerBalls = new NumberBalls(Lists.list(numberOne, numberTwo, numberThree));
+        NumberBalls computerBalls = new NumberBalls(list(numberOne, numberTwo, numberThree));
         assertThat(computerBalls.compute(playerBalls)).isEqualTo(gameResult);
     }
 
@@ -65,15 +65,15 @@ class NumberBallsTest {
         NumberBall six = NumberBall.of(6);
 
         return Stream.of(
-            Arguments.of(new NumberBalls(Lists.list(one, two, three)), Result.of(3, 0)),
-            Arguments.of(new NumberBalls(Lists.list(one, four, three)), Result.of(2, 0)),
-            Arguments.of(new NumberBalls(Lists.list(five, two, six)), Result.of(1, 0)),
-            Arguments.of(new NumberBalls(Lists.list(five, four, six)), Result.of(0, 0)),
-            Arguments.of(new NumberBalls(Lists.list(one, five, two)), Result.of(1, 1)),
-            Arguments.of(new NumberBalls(Lists.list(five, three, six)), Result.of(0, 1)),
-            Arguments.of(new NumberBalls(Lists.list(two, one, three)), Result.of(1, 2)),
-            Arguments.of(new NumberBalls(Lists.list(three, four, two)), Result.of(0, 2)),
-            Arguments.of(new NumberBalls(Lists.list(three, one, two)), Result.of(0, 3))
+            Arguments.of(new NumberBalls(list(one, two, three)), Result.of(3, 0)),
+            Arguments.of(new NumberBalls(list(one, four, three)), Result.of(2, 0)),
+            Arguments.of(new NumberBalls(list(five, two, six)), Result.of(1, 0)),
+            Arguments.of(new NumberBalls(list(five, four, six)), Result.of(0, 0)),
+            Arguments.of(new NumberBalls(list(one, five, two)), Result.of(1, 1)),
+            Arguments.of(new NumberBalls(list(five, three, six)), Result.of(0, 1)),
+            Arguments.of(new NumberBalls(list(two, one, three)), Result.of(1, 2)),
+            Arguments.of(new NumberBalls(list(three, four, two)), Result.of(0, 2)),
+            Arguments.of(new NumberBalls(list(three, one, two)), Result.of(0, 3))
         );
     }
 }
