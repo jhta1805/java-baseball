@@ -71,4 +71,19 @@ public class NumberBalls {
         distinctNumbers.addAll(otherBalls);
         return this.balls.size() + otherBalls.size() - distinctNumbers.size();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        NumberBalls that = (NumberBalls)o;
+        return Objects.equals(balls, that.balls);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(balls);
+    }
 }
