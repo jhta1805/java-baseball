@@ -21,7 +21,9 @@ class ManualNumberBallsGeneratorTest {
     @ParameterizedTest
     @ValueSource(ints = {333, 1234, 75, -152, -10})
     void generateBalls_test_fail(int value) {
-        NumberBallsGenerator numberBallsGenerator = new ManualNumberBallsFactory(value);
-        assertThatThrownBy(numberBallsGenerator::generateBalls).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> {
+            NumberBallsGenerator numberBallsGenerator = new ManualNumberBallsFactory(value);
+            numberBallsGenerator.generateBalls();
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
