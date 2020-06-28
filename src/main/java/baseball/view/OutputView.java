@@ -15,8 +15,8 @@ public class OutputView {
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     public static void printCompareResult(final Result compute) {
-        final Count strike = compute.getStrikeCount();
-        final Count ball = compute.getBallCount();
+        final Count strike = compute.getStrike();
+        final Count ball = compute.getBall();
         if (isNothing(strike, ball)) {
             System.out.println(NOTHING_MESSAGE);
             return;

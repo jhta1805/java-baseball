@@ -7,13 +7,13 @@ public final class Result {
         "스트라이크와 볼의 값의 합이 현재 가능한 값을 넘었습니다.";
     private static final String NULL_COUNT_EXCEPTION_MESSAGE = "NULL값이 들어갈 수 없습니다.";
 
-    private final Count strikeCount;
-    private final Count ballCount;
+    private final Count strike;
+    private final Count ball;
 
-    private Result(final Count strikeCount, final Count ballCount) {
-        verifyCounts(strikeCount, ballCount);
-        this.strikeCount = strikeCount;
-        this.ballCount = ballCount;
+    private Result(final Count strike, final Count ball) {
+        verifyCounts(strike, ball);
+        this.strike = strike;
+        this.ball = ball;
     }
 
     private void verifyCounts(final Count strikeCount, final Count ballCount) {
@@ -30,15 +30,15 @@ public final class Result {
     }
 
     public boolean isAllStrike() {
-        return strikeCount.isSameValue(NumberBalls.BALL_NUMBER_LENGTH);
+        return strike.isSameValue(NumberBalls.BALL_NUMBER_LENGTH);
     }
 
-    public Count getStrikeCount() {
-        return strikeCount;
+    public Count getStrike() {
+        return strike;
     }
 
-    public Count getBallCount() {
-        return ballCount;
+    public Count getBall() {
+        return ball;
     }
 
     @Override
@@ -48,12 +48,12 @@ public final class Result {
         if (o == null || getClass() != o.getClass())
             return false;
         Result result = (Result)o;
-        return strikeCount == result.strikeCount &&
-            ballCount == result.ballCount;
+        return strike == result.strike &&
+            ball == result.ball;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(strikeCount, ballCount);
+        return Objects.hash(strike, ball);
     }
 }
