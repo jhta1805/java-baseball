@@ -2,6 +2,7 @@ package baseball.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class NumberBall {
     private static final int MIN_VALUE = 1;
@@ -26,5 +27,20 @@ public class NumberBall {
             return BALL_CACHE.get(value);
         }
         throw new IllegalArgumentException(OUT_OF_BOUND_BALL_NUMBER_EXCEPTION_MESSAGE);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        NumberBall that = (NumberBall)o;
+        return value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
