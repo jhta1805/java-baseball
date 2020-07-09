@@ -9,8 +9,8 @@ public class BaseballServiceImpl implements SportsGameService {
         return checkNumber(b.getUserNumber(), b.getComNumber());
     }
 
-    private final Integer NUM_DIGIT = 3;
-    private final String OVER_DIGIT_MESSAGE = "세자리 수를 입력해주세요.";
+    private static final Integer NUM_DIGIT = 3;
+    private static final String OVER_DIGIT_MESSAGE = "세자리 수를 입력해주세요.";
     @Override
     public Boolean checkLength(String userNumber) {
         if (userNumber.length() != NUM_DIGIT) {
@@ -19,7 +19,7 @@ public class BaseballServiceImpl implements SportsGameService {
         }
         return true;
     }
-    private final Integer GAME_QUIT = 000;
+    private static final Integer GAME_QUIT = 000;
     @Override
     public Boolean gameQuit(String userNumber) {
         if (userNumber.equals(GAME_QUIT)) {
@@ -28,7 +28,7 @@ public class BaseballServiceImpl implements SportsGameService {
         return true;
     }
 
-    private final String NOT_INT_MESSAGE = "문자는 안됩니다. 숫자를 입력하세요.";
+    private static final String NOT_INT_MESSAGE = "문자는 안됩니다. 숫자를 입력하세요.";
     @Override
     public Boolean isInt(String userNumber) {
         try {
@@ -85,7 +85,7 @@ public class BaseballServiceImpl implements SportsGameService {
     }
 
 
-    private static String reverseStr(String s) {
+    private String reverseStr(String s) {
         return (new StringBuffer(s)).reverse().toString();
     }
 }
