@@ -1,52 +1,56 @@
+import domain.Computer;
+import domain.Result;
+import domain.User;
+import view.BaseballGameView;
+
 import java.util.Random;
 import java.util.Scanner;
 
 public class BaseballGame {
     Scanner scanner;
-    private String computerNum;
-    private String userNum;
-    private int strike;
-    private int ball;
+    private Computer computer;
+    private User user;
+    private Result result;
 
     public BaseballGame() {
         this.scanner = new Scanner(System.in);
-        this.strike = 0;
-        this.ball = 0;
+        this.computer = new Computer();
+        this.user = new User();
+        this.result = new Result();
     }
 
     public void start() {
+        initResultStats();
         setRandomNumber();
+        enterNumber();
+        selectMenu();
+    }
 
+    private void initResultStats() {
+        result.initStrikeAndBallScore();
+    }
+
+    private void enterNumber() {
         while (true) {
-            System.out.print("숫자를 입력해주세요 : ");
-            userNum = String.valueOf(scanner.nextInt());
-            checkNumber();
-            break;
+            try {
+                System.out.print(BaseballGameView.INPUT_NUMBER_MESSAGE);
+                user.inputNumberToString(scanner.nextInt());
+
+                if (user.notNumberLengthIsThree()) {
+                    throw new Exception(BaseballGameView.INCORRECT_DIGIT_MESSAGE);
+                }
+
+                if (user.isCorrectNumber(computer))
+                    break;
+                initResultStats();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
-    private void checkNumber() {
-        for (int i=0; i<userNum.length(); i++) {
-            for (int j=0; j<computerNum.length(); j++) {
-                if (i == j) {
-                    if (userNum.charAt(i) == computerNum.charAt(j))
-                        strike++;
-                } else {
-                    if (userNum.charAt(i) == computerNum.charAt(j))
-                        ball++;
-                }
-            }
-        }
-        if (strike > 0)
-            System.out.print(strike + " 스트라이크 ");
-        if (ball > 0)
-            System.out.print(ball + "볼");
-        System.out.println("");
-
-        if (strike == 3) {
-            System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-            System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-        }
+    private void selectMenu() {
+        System.out.println(BaseballGameView.SUCCESS_MESSAGE);
 
         int selectMenuNum = scanner.nextInt();
 
@@ -62,10 +66,10 @@ public class BaseballGame {
         Random random = new Random();
 
         while (true) {
-            computerNum = String.valueOf(random.nextInt(900) + 100);
-
-            if ((computerNum.charAt(0) != computerNum.charAt(1) && (computerNum.charAt(0) != computerNum.charAt(2)) && (computerNum.charAt(1) != computerNum.charAt(2))))
+            computer.makeRandomNumberToString(random.nextInt(900) + 100);
+            if (computer.notExistsDuplicateDigit())
                 break;
         }
+        System.out.println("computerNum : " + computer.getComputerNum());
     }
 }
