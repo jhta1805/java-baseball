@@ -1,6 +1,6 @@
-package view;
+package constant;
 
-public final class BaseballGameView {
+public final class Message {
     public static final String INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요 : ";
     public static final String INCORRECT_DIGIT_MESSAGE = "세 자리 수를 입력해야 합니다.";
     public static final String STRIKE_MESSAGE = " 스트라이크 ";

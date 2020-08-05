@@ -16,8 +16,4 @@ public class Computer {
     public String getComputerNum() {
         return computerNum;
     }
-
-    public void setComputerNum(String computerNum) {
-        this.computerNum = computerNum;
-    }
 }
