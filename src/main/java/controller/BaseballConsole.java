@@ -1,6 +1,7 @@
 package controller;
 import constant.Message;
 import domain.Computer;
+import domain.Result;
 import domain.User;
 import service.BaseballService;
 
@@ -10,12 +11,14 @@ public class BaseballConsole {
     private Scanner scanner;
     private Computer computer;
     private User user;
+    private Result result;
     private BaseballService baseballService;
 
     public BaseballConsole() {
         this.scanner = new Scanner(System.in);
         this.computer = new Computer();
         this.user = new User();
+        this.result = new Result();
         this.baseballService = new BaseballService();
     }
 
@@ -32,14 +35,12 @@ public class BaseballConsole {
         while (true) {
             try {
                 System.out.print(Message.INPUT_NUMBER_MESSAGE);
-                user.inputNumberToString(scanner.nextInt());
-
-                if (user.notNumberLengthIsThree()) {
-                    throw new Exception(Message.INCORRECT_DIGIT_MESSAGE);
-                }
-
-                if (baseballService.isCorrectNumber(computer, user))
+                user.inputNumberToString(scanner);
+                result = baseballService.getGameResult(computer, user);
+                printGameResult(result);
+                if (result.isThreeStrike()) {
                     break;
+                }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -57,5 +58,18 @@ public class BaseballConsole {
             case 2 :
                 System.exit(0);
         }
+    }
+
+    private void printGameResult(Result result) {
+        int strike = result.getStrike();
+        int ball = result.getBall();
+
+        if (strike > 0)
+            System.out.print(strike + Message.STRIKE_MESSAGE);
+        if (ball > 0)
+            System.out.print(ball + Message.BALL_MESSAGE);
+        if (strike == 0 && ball == 0)
+            System.out.print(Message.NO_STRIKE_NO_BALL_MESSAGE);
+        System.out.println("");
     }
 }

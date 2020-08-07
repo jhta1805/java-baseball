@@ -3,6 +3,7 @@ package constant;
 public final class Message {
     public static final String INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요 : ";
     public static final String INCORRECT_DIGIT_MESSAGE = "세 자리 수를 입력해야 합니다.";
+    public static final String DUPLICATE_DIGIT_MESSAGE = "중복되는 수가 존재합니다.";
     public static final String STRIKE_MESSAGE = " 스트라이크 ";
     public static final String BALL_MESSAGE = "볼";
     public static final String NO_STRIKE_NO_BALL_MESSAGE = "낫싱";

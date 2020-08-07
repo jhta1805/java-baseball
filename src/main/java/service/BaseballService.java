@@ -1,7 +1,7 @@
 package service;
 
-import constant.Message;
 import domain.Computer;
+import domain.Result;
 import domain.User;
 
 import java.util.Random;
@@ -18,45 +18,43 @@ public class BaseballService {
         System.out.println("computerNum : " + computer.getComputerNum());
     }
 
-    public boolean isCorrectNumber(Computer computer, User user) {
-        String computerNum = computer.getComputerNum();
+    public Result getGameResult(Computer computer, User user) {
+        Result gameResult = calculateGameResult(computer, user);
+        return gameResult;
+    }
+
+    private Result calculateGameResult(Computer computer, User user) {
         String userNum = user.getUserNum();
+        String computerNum = computer.getComputerNum();
+        Result gameResult = new Result();
 
-        int strike = getStrikeResult();
-        int ball = getBallResult();
+        for (int i=0; i<userNum.length(); i++) {
+            int userDigit = userNum.charAt(i);
+            int computerDigit = computerNum.charAt(i);
 
-//        for (int i=0; i<userNum.length(); i++) {
-//            for (int j=0; j<computerNum.length(); j++) {
-//                if (i == j) {
-//                    if (userNum.charAt(i) == computerNum.charAt(j))
-//                        strike++;
-//                } else {
-//                    if (userNum.charAt(i) == computerNum.charAt(j))
-//                        ball++;
-//                }
-//            }
-//        }
-
-        if (strike > 0)
-            System.out.print(strike + Message.STRIKE_MESSAGE);
-        if (ball > 0)
-            System.out.print(ball + Message.BALL_MESSAGE);
-        if (strike == 0 && ball == 0)
-            System.out.print(Message.NO_STRIKE_NO_BALL_MESSAGE);
-        System.out.println("");
-
-        if (strike == 3) {
-            return true;
+            if (isStrike(userDigit, computerDigit)) {
+                gameResult.plusStrike();
+            } else if (isBall(userDigit, computer)) {
+                gameResult.plusBall();
+            }
         }
 
+        return gameResult;
+    }
+
+    private boolean isStrike(int userDigit, int computerDigit) {
+        return userDigit == computerDigit;
+    }
+
+    private boolean isBall(int userDigit, Computer computer) {
+        String computerNum = computer.getComputerNum();
+
+        for (int i=0; i<computerNum.length(); i++) {
+            int computerDigit = computerNum.charAt(i);
+            if (userDigit == computerDigit) {
+                return true;
+            }
+        }
         return false;
-    }
-
-    private int getBallResult() {
-
-    }
-
-    private int getStrikeResult() {
-
     }
 }
