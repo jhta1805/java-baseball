@@ -16,9 +16,10 @@ public class BaseBallPlayService implements BaseballPlayImpl {
         outputView.messagePrint("START", "");
         ball.userBall = InputView.inputBalls();
         this.userBallNumberVerification(ball.userBall);
-        this.baseBallMatching(ball.userBall);
-        outputView.messagePrint("GAME_RESULT", ball.pitchZone.toString());
         this.messageDelete();
+        this.baseBallMatching(ball.userBall);
+        if (ball.strikeCount < 3) outputView.messagePrint("GAME_RESULT", ball.pitchZone.toString());
+        else outputView.messagePrint("GAME_RESULT", "3 스트라이크");
         this.gameRestartOrGameEnd();
     }
 
@@ -36,6 +37,7 @@ public class BaseBallPlayService implements BaseballPlayImpl {
     }
 
     public void baseBallMatching(String userBall) {
+        System.out.println(computerBall);
         if (!userBall.trim().isEmpty()) {
             if (String.valueOf(userBall.charAt(0)).equals(String.valueOf(computerBall.charAt(0)))) {
                 ball.strikeCount++;
@@ -62,7 +64,7 @@ public class BaseBallPlayService implements BaseballPlayImpl {
             coin = InputView.inputCoin();
         }
         this.messageDelete();
-        if(coin == 1) this.gameReset();
+        if (coin == 1) this.gameReset();
         else InputView.getClose();
     }
 
